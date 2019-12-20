@@ -1,6 +1,6 @@
 package com.wise.listener;
 
-import com.wise.config.Constants;
+import com.wise.config.rabbitmq.RabbitMQConfig;
 import com.wise.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
@@ -21,7 +21,7 @@ public class OrderListener {
      */
     private final AtomicInteger count = new AtomicInteger();
 
-    @StreamListener(target = Constants.STREAM_BINDING_ORDER_INPUT_CHANNEL)
+    @StreamListener(target = RabbitMQConfig.STREAM_BINDING_ORDER_INPUT_CHANNEL)
     public void processOrderChannel(Order order) {
         log.info("order:{}", order);
         log.info("publish: {}", count.get());
@@ -36,7 +36,7 @@ public class OrderListener {
         }
     }
 
-    @StreamListener(target = Constants.STREAM_BINDING_CACHE_INPUT_CHANNEL)
+    @StreamListener(target = RabbitMQConfig.STREAM_BINDING_CACHE_INPUT_CHANNEL)
     public void processCacheChannel(Order order) {
         log.info("cache: {}", order);
     }

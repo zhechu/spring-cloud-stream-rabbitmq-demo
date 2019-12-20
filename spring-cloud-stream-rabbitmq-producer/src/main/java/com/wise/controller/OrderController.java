@@ -1,7 +1,7 @@
 package com.wise.controller;
 
-import com.wise.bind.CacheOutputBinding;
-import com.wise.bind.OrderBinding;
+import com.wise.config.rabbitmq.bind.CacheOutputBinding;
+import com.wise.config.rabbitmq.bind.OrderBinding;
 import com.wise.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.MessageBuilder;

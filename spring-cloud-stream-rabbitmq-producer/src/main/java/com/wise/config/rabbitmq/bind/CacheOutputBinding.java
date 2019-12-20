@@ -1,6 +1,6 @@
-package com.wise.bind;
+package com.wise.config.rabbitmq.bind;
 
-import com.wise.config.Constants;
+import com.wise.config.rabbitmq.RabbitMQConfig;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
@@ -9,7 +9,7 @@ import org.springframework.messaging.MessageChannel;
  */
 public interface CacheOutputBinding {
 
-    @Output(Constants.STREAM_BINDING_CACHE_OUTPUT_CHANNEL)
+    @Output(RabbitMQConfig.STREAM_BINDING_CACHE_OUTPUT_CHANNEL)
     MessageChannel cacheOutputChannel();
 
 }

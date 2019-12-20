@@ -1,6 +1,6 @@
-package com.wise.bind;
+package com.wise.config.rabbitmq.bind;
 
-import com.wise.config.Constants;
+import com.wise.config.rabbitmq.RabbitMQConfig;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
@@ -9,7 +9,7 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface CacheInputBinding {
 
-    @Input(Constants.STREAM_BINDING_CACHE_INPUT_CHANNEL)
+    @Input(RabbitMQConfig.STREAM_BINDING_CACHE_INPUT_CHANNEL)
     SubscribableChannel cacheInputChannel();
 
 }
