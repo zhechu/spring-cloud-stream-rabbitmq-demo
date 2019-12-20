@@ -1,12 +1,12 @@
 
 server:
-  port: 8082
+  port: 7082
 
 spring:
   application:
     name: spring-cloud-stream-rabbitmq-consumer
   rabbitmq:
-    host: 192.168.163.41
+    host: 192.168.163.21
     port: 5672
     username: admin
     password: 123456

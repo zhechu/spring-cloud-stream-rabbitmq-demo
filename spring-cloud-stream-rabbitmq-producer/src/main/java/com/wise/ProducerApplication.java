@@ -9,7 +9,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 
 /**
  * 启动类
- * 访问：http://127.0.0.1:8081/orders/publish POST { "order_name": "order 1", "amount": 5000, "status": "new" }
+ * 访问：http://127.0.0.1:7081/orders/publish POST { "order_name": "order 1", "amount": 5000, "status": "new" }
  */
 @SpringBootApplication
 @EnableBinding({
