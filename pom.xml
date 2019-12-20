@@ -10,6 +10,7 @@
     <modules>
         <module>spring-cloud-stream-rabbitmq-producer</module>
         <module>spring-cloud-stream-rabbitmq-consumer</module>
+        <module>spring-cloud-stream-rabbitmq-consumer-two</module>
     </modules>
     <packaging>pom</packaging>
 

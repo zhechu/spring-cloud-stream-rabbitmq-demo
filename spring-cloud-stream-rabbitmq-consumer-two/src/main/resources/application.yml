@@ -1,6 +1,6 @@
 
 server:
-  port: 7082
+  port: 7083
 
 spring:
   application:
@@ -12,8 +12,8 @@ spring:
     password: 123456
     virtual-host: /dev
   cloud:
-    # 官方文档 https://github.com/spring-cloud/spring-cloud-stream-binder-rabbit/tree/2.1.x
     stream:
+      # 官方文档 https://github.com/spring-cloud/spring-cloud-stream-binder-rabbit/tree/2.1.x
       bindings:
         orderInputChannel:
           # 对应 RabbitMQ 的交换器
