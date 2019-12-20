@@ -1,8 +1,8 @@
 package com.wise.controller;
 
-import com.wise.config.rabbitmq.bind.CacheOutputBinding;
-import com.wise.config.rabbitmq.bind.OrderBinding;
+import com.wise.config.RabbitMQConfig;
 import com.wise.entity.Order;
+import com.wise.util.JacksonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     @Autowired
-    private OrderBinding orderBinding;
-
-    @Autowired
-    private CacheOutputBinding cacheBinding;
+    private RabbitMQConfig.OutputBinding outputBinding;
 
     @PostMapping("/publish")
     public String publishOrder(@RequestBody Order order) {
         // 订单发布
-        orderBinding.orderOutputChannel().send(MessageBuilder.withPayload(order).build());
+        outputBinding.orderOutputChannel().send(MessageBuilder.withPayload(order).build());
 
         // 订单缓存
-        cacheBinding.cacheOutputChannel().send(MessageBuilder.withPayload(order).build());
+        outputBinding.cacheOutputChannel().send(MessageBuilder.withPayload(order).build());
+
+        // 字符串
+        outputBinding.stringOutputChannel().send(MessageBuilder.withPayload(JacksonUtil.writeValueAsString(order)).build());
         return "order_published";
     }
 

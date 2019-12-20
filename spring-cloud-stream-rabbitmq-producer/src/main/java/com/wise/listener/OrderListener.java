@@ -1,6 +1,6 @@
 package com.wise.listener;
 
-import com.wise.config.rabbitmq.RabbitMQConfig;
+import com.wise.config.RabbitMQConfig;
 import com.wise.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.StreamListener;
