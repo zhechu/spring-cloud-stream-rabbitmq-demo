@@ -2,7 +2,9 @@ package com.wise.controller;
 
 import com.wise.config.RabbitMQConfig;
 import com.wise.entity.Order;
+import com.wise.entity.OrderTerm;
 import com.wise.util.JacksonUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,9 @@ public class OrderController {
         outputBinding.cacheOutputChannel().send(MessageBuilder.withPayload(order).build());
 
         // 字符串
-        outputBinding.stringOutputChannel().send(MessageBuilder.withPayload(JacksonUtil.writeValueAsString(order)).build());
+        OrderTerm orderTerm = new OrderTerm();
+        BeanUtils.copyProperties(order, orderTerm);
+        outputBinding.stringOutputChannel().send(MessageBuilder.withPayload(JacksonUtil.writeValueAsString(orderTerm)).build());
         return "order_published";
     }
 

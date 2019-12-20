@@ -15,6 +15,14 @@ spring:
     # 官方文档 https://github.com/spring-cloud/spring-cloud-stream-binder-rabbit/tree/2.1.x
     stream:
       bindings:
+        stringInputChannel:
+          # 对应 RabbitMQ 的交换器
+          destination: string-exchange
+          # 对应 RabbitMQ 的队列，指定名称则会单播分发；若不设置，则默认会随机计算一个队列名，实现消息多播分发
+          group: string-queue
+          consumer:
+            # 禁用重试，默认为3
+            max-attempts: 3
         orderInputChannel:
           # 对应 RabbitMQ 的交换器
           destination: order-exchange

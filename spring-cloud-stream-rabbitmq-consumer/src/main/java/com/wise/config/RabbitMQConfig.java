@@ -19,10 +19,15 @@ public class RabbitMQConfig {
 
     public final static String STREAM_BINDING_CACHE_INPUT_CHANNEL = "cacheInputChannel";
 
+    public final static String STREAM_BINDING_STRING_INPUT_CHANNEL = "stringInputChannel";
+
     /**
      * 监听消息绑定
      */
     interface InputBinding {
+
+        @Input(RabbitMQConfig.STREAM_BINDING_STRING_INPUT_CHANNEL)
+        SubscribableChannel stringInputChannel();
 
         @Input(RabbitMQConfig.STREAM_BINDING_CACHE_INPUT_CHANNEL)
         SubscribableChannel cacheInputChannel();

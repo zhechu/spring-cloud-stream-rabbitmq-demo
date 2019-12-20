@@ -2,6 +2,8 @@ package com.wise.listener;
 
 import com.wise.config.RabbitMQConfig;
 import com.wise.entity.Order;
+import com.wise.entity.OrderTerm;
+import com.wise.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
@@ -40,5 +42,12 @@ public class OrderListener {
         log.info("cache: {}", order);
     }
 
+    @StreamListener(target = RabbitMQConfig.STREAM_BINDING_STRING_INPUT_CHANNEL)
+    public void processStringChannel(String string) {
+        log.info("string: {}", string);
+
+        OrderTerm orderTerm = JacksonUtil.readValue(string, OrderTerm.class);
+        log.info("string orderTerm: {}", orderTerm);
+    }
 
 }
