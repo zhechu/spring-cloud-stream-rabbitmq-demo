@@ -6,10 +6,10 @@ spring:
   application:
     name: spring-cloud-stream-rabbitmq-producer
   rabbitmq:
-    host: 10.113.248.209
+    host: 192.168.163.21
     port: 5672
     username: admin
-    password: admin
+    password: 123456
     virtual-host: /dev
   cloud:
     stream:

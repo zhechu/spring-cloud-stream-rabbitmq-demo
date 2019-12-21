@@ -6,10 +6,10 @@ spring:
   application:
     name: spring-cloud-stream-rabbitmq-consumer
   rabbitmq:
-    host: 10.113.248.209
+    host: 192.168.163.21
     port: 5672
     username: admin
-    password: admin
+    password: 123456
     virtual-host: /dev
   cloud:
     stream:
@@ -38,3 +38,7 @@ spring:
               dead-letter-exchange: order-exchange-dlx
               # 失败的消息将会被重新提交到同一个 handler 进行处理，直到 handler 抛出 AmqpRejectAndDontRequeueException 异常为止
               requeue-rejected: true
+              # 删除未使用的队列的时间（以毫秒为单位）
+              expires: 10000
+              # 删除未使用的死信队列的时间（以毫秒为单位）
+              dlq-expires: 10000
