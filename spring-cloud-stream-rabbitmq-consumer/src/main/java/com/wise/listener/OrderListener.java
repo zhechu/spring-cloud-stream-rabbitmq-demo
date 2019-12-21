@@ -28,6 +28,7 @@ public class OrderListener {
         log.info("publish: {}", count.get());
 
 //        if (count.compareAndSet(3, 1)) {
+//            log.info("publish end: {}", count.get());
 //            // 抛出此异常则将消息放入死信队列
 //            throw new AmqpRejectAndDontRequeueException("tried 3 times failed, send to dlq!");
 //        } else {

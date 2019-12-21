@@ -6,10 +6,10 @@ spring:
   application:
     name: spring-cloud-stream-rabbitmq-consumer
   rabbitmq:
-    host: 192.168.163.21
+    host: 10.113.248.209
     port: 5672
     username: admin
-    password: 123456
+    password: admin
     virtual-host: /dev
   cloud:
     # 官方文档 https://github.com/spring-cloud/spring-cloud-stream-binder-rabbit/tree/2.1.x
@@ -30,7 +30,7 @@ spring:
           group: order-queue
           consumer:
             # 禁用重试，默认为3
-            max-attempts: 1
+            max-attempts: 5
         cacheInputChannel:
           # 对应 RabbitMQ 的交换器
           destination: cache-exchange
