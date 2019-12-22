@@ -26,3 +26,9 @@ spring:
         cacheInputChannel:
           # 对应 RabbitMQ 的交换器
           destination: cache-exchange
+      rabbit:
+        bindings:
+          orderOutputChannel:
+            producer:
+              # 发送到路由键的表达式
+              routing-key-expression: '''one.odd'''

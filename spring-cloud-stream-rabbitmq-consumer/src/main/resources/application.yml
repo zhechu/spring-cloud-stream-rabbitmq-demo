@@ -50,3 +50,6 @@ spring:
               expires: 10000
               # 删除未使用的死信队列的时间（以毫秒为单位）
               dlq-expires: 10000
+              # 用于将队列绑定到交换机的路由键（如果bindQueue为true,bindQueue默认为true）
+              binding-routing-key: one.*
+              bind-queue: true
