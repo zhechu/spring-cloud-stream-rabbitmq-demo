@@ -1,0 +1,34 @@
+
+server:
+  port: 7084
+
+spring:
+  application:
+    name: spring-cloud-stream-rabbitmq-producer-two
+  rabbitmq:
+    host: 192.168.163.21
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: /dev
+  cloud:
+    stream:
+      bindings:
+        stringOutputChannel:
+          # 对应 RabbitMQ 的交换器
+          destination: string-exchange
+        orderOutputChannel:
+          # 对应 RabbitMQ 的交换器
+          destination: order-exchange
+        cacheOutputChannel:
+          # 对应 RabbitMQ 的交换器
+          destination: cache-exchange
+        cacheInputChannel:
+          # 对应 RabbitMQ 的交换器
+          destination: cache-exchange
+      rabbit:
+        bindings:
+          orderOutputChannel:
+            producer:
+              # 发送到路由键的表达式
+              routing-key-expression: '''two.even'''
