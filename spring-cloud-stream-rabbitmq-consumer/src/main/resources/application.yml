@@ -5,17 +5,30 @@ server:
 spring:
   application:
     name: spring-cloud-stream-rabbitmq-consumer
-  rabbitmq:
-    host: 192.168.163.21
-    port: 5672
-    username: admin
-    password: 123456
-    virtual-host: /dev
+#  rabbitmq:
+#    host: 192.168.163.21
+#    port: 5672
+#    username: admin
+#    password: 123456
+#    virtual-host: /dev
   cloud:
     # 官方文档 https://github.com/spring-cloud/spring-cloud-stream-binder-rabbit/tree/2.1.x
     stream:
+      binders:
+        # 名称可以随便起（可以配多个）
+        messagemq:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 192.168.163.21
+                port: 5672
+                username: admin
+                password: 123456
+                virtual-host: /dev
       bindings:
         stringInputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: string-exchange
           # 对应 RabbitMQ 的队列，指定名称则会单播分发；若不设置，则默认会随机计算一个队列名，实现消息多播分发
@@ -24,6 +37,7 @@ spring:
             # 禁用重试，默认为3
             max-attempts: 3
         orderInputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: order-exchange
           # 对应 RabbitMQ 的队列，指定名称则会单播分发；若不设置，则默认会随机计算一个队列名，实现消息多播分发
@@ -32,6 +46,7 @@ spring:
             # 禁用重试，默认为3
             max-attempts: 5
         cacheInputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: cache-exchange
       rabbit:
@@ -46,7 +61,7 @@ spring:
               dead-letter-exchange: order-exchange-dlx
               # 失败的消息将会被重新提交到同一个 handler 进行处理，直到 handler 抛出 AmqpRejectAndDontRequeueException 异常为止
               requeue-rejected: true
-              # 删除未使用的队列的时间（以毫秒为单位）
+              # 删除未使用的队列的时间（以毫秒为单位，有丢失消息的风险，如：队列突然被删除后，生产者生产的消息没有队列监听，则会丢失）
               expires: 10000
 #              # 删除未使用的死信队列的时间（以毫秒为单位）
 #              dlq-expires: 10000

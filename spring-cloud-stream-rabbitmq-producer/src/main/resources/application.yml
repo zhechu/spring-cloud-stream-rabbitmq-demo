@@ -5,25 +5,41 @@ server:
 spring:
   application:
     name: spring-cloud-stream-rabbitmq-producer
-  rabbitmq:
-    host: 192.168.163.21
-    port: 5672
-    username: admin
-    password: 123456
-    virtual-host: /dev
+#  rabbitmq:
+#    host: 192.168.163.21
+#    port: 5672
+#    username: admin
+#    password: 123456
+#    virtual-host: /dev
   cloud:
     stream:
+      binders:
+        # 名称可以随便起（可以配多个）
+        messagemq:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 192.168.163.21
+                port: 5672
+                username: admin
+                password: 123456
+                virtual-host: /dev
       bindings:
         stringOutputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: string-exchange
         orderOutputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: order-exchange
         cacheOutputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: cache-exchange
         cacheInputChannel:
+          binder: messagemq
           # 对应 RabbitMQ 的交换器
           destination: cache-exchange
       rabbit:

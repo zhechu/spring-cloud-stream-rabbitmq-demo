@@ -38,7 +38,7 @@ spring:
               dead-letter-exchange: order-exchange-dlx
               # 失败的消息将会被重新提交到同一个 handler 进行处理，直到 handler 抛出 AmqpRejectAndDontRequeueException 异常为止
               requeue-rejected: true
-              # 删除未使用的队列的时间（以毫秒为单位）
+              # 删除未使用的队列的时间（以毫秒为单位，有丢失消息的风险，如：队列突然被删除后，生产者生产的消息没有队列监听，则会丢失）
               expires: 10000
 #              # 删除未使用的死信队列的时间（以毫秒为单位）
 #              dlq-expires: 10000
